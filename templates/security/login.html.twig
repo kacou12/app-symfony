@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!
+{% endblock %}
+
+{% block body %}
+	<div class="parent">
+		<div class="login-page">
+			<div class="form">
+				<form method="post" class="login-form">
+
+
+					{% if app.user %}
+						<div class="mb-3">
+							You are logged in as
+							{{ app.user.username }},
+							<a href="{{ path('app_logout') }}">Logout</a>
+						</div>
+					{% endif %}
+					<img src="/images/admin.svg" alt="">
+
+					<h2 class="h3 mb-3">ADMIN PANEL</h2>
+
+					{% if error %}
+						<div class="alert alert-danger error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+					{# <label for="inputUsername">Username</label> #}
+					<input
+					type="text" value="{{ last_username }}" name="username" id="inputUsername" placeholder="nom d'utilisateur" class="form-control" autocomplete="username" required autofocus>
+					{# <label for="inputPassword">Password</label> #}
+					<input type="password" name="password" id="inputPassword" class="form-control" placeholder="mot de passe" autocomplete="current-password" required>
+
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+					<button class="btn btn-lg btn-primary" type="submit">
+						CONNNEXION
+					</button>
+				</form>
+			</div>
+		</div>
+
+	{% endblock %}
+	{% block stylesheets %}
+		<style>
+			body {
+				margin: 0 !important;
+
+			}
+			@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+			.parent {
+				background: url("/images/forgetPassword.jpg") top center;
+				height: 100vh;
+			}
+			.error {
+				color: red;
+				margin: 10px 15px;
+
+			}
+			.parent * {
+				font-family: "Roboto";
+			}
+			.login-page {
+				width: 360px;
+				padding: 8% 0 0;
+				margin: auto;
+
+			}
+			.form {
+				position: relative;
+				z-index: 1;
+				background: #FFFFFF;
+				max-width: 360px;
+				margin: 0 auto 100px;
+				padding: 45px;
+				text-align: center;
+				box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+			}
+			.form input {
+				font-family: "Roboto", sans-serif;
+				outline: 0;
+				background: #f2f2f2;
+				width: 100%;
+				border: 0;
+				margin: 0 0 15px;
+				padding: 15px;
+				box-sizing: border-box;
+				font-size: 14px;
+			}
+			.form button {
+				font-family: "Roboto", sans-serif;
+				text-transform: uppercase;
+				outline: 0;
+				/*background: #4CAF50;*/
+				/*background: #6174d1;*/
+				background: rgba(97, 116, 209, 1);
+				width: 100%;
+				border: 0;
+				padding: 15px;
+				color: #FFFFFF;
+				font-size: 14px;
+				transition: 0.5s;
+				cursor: pointer;
+			}
+			.form button:hover,
+			.form button:active,
+			.form button:focus {
+				/*background: #43A047;*/
+				background: rgba(97, 116, 209, 0.8);
+
+			}
+			.form .message {
+				margin: 15px 0 0;
+				color: #b3b3b3;
+				font-size: 12px;
+			}
+			.form .message a {
+				color: #4CAF50;
+				text-decoration: none;
+			}
+			.form .register-form {
+				display: none;
+			}
+		</style>
+
+	{% endblock %}
