@@ -44,7 +44,14 @@
 
 {% block main %}
     {% block new_form %}
-        {{ form(new_form) }}
+    {{ form_start(new_form) }}
+        {{ form_widget(new_form) }}
+        <p>uno</p>
+        <div class="showVideo">
+            <video controls autoplay id="yanVideo"></video>
+        </div>
+        {# Video_videoFile #}
+    {{ form_end(new_form) }}
+        {# {{ form(new_form) }} #}
     {% endblock new_form %}
-    <p>un text</p>
 {% endblock %}
