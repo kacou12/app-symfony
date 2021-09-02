@@ -46,6 +46,13 @@
                 {% endif %}
             {% endblock %}
         {% endfor %}
+                {% if showVideo is defined %}
+                    <div class="col-md-8"> 
+                        <video width="500" height="300" controls autoplay id="yanShowVideo">
+                            <source src="{{ asset(urlVideo) }}" type="video/mp4">
+                        </video>
+                    </div>
+                {% endif %}
 
         {{ _self.close_form_field_panel() }}
     {% endblock %}
@@ -90,6 +97,8 @@
                         {% if panel_help %}
                             <div class="form-panel-help">{{ panel_help|raw }}</div>
                         {% endif %}
+                      
+                        
                     </div>
                 </div>
             {% endif %}

@@ -52,6 +52,13 @@
 {% block main %}
     {% block edit_form %}
         {{ form(edit_form) }}
+         {% if editVideo is defined %}
+            <div class="col-md-8"> 
+                <video width="500" height="300" controls autoplay  id="yanNewVideo">
+                    <source src="{{ asset(urlVideo) }}" type="video/mp4">
+                </video>
+            </div>
+        {% endif %}
     {% endblock edit_form %}
 
     {% block delete_form %}
