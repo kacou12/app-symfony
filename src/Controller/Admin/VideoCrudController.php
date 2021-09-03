@@ -33,14 +33,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Exception\ForbiddenActionException;
 use EasyCorp\Bundle\EasyAdminBundle\Exception\InsufficientEntityPermissionException;
-
+use Symfony\Component\Filesystem\Filesystem;
 
 class VideoCrudController extends AbstractCrudController
 {
     public $file_uploader;
-    public function __construct(FileUploader $file_uploader)
+    private $projectDir;
+    public function __construct(FileUploader $file_uploader, string $projectDir)
     {
         $this->file_uploader =  $file_uploader;
+        $this->projectDir = $projectDir;
     }
     public static function getEntityFqcn(): string
     {
@@ -113,6 +115,29 @@ class VideoCrudController extends AbstractCrudController
             $event = new BeforeEntityUpdatedEvent($entityInstance);
             $this->get('event_dispatcher')->dispatch($event);
             $entityInstance = $event->getEntityInstance();
+
+            //yan add
+            // dd($entityInstance, $entityInstance->getVideoFile());
+            if ($entityInstance->getVideoFile()) {
+                $filesystem = new Filesystem();
+                // $filesystem->remove($entityInstance->getUrl());
+
+                // $filesystem->remove("/uploads/Naruto-Ending-4-Alive.mp4");
+                $newUrl = str_replace("/", "\\", $entityInstance->getUrl());
+
+                // dd($this->projectDir .'\\public\\' .$newUrl);
+                $filesystem->remove($this->projectDir . '\\public\\' . $newUrl);
+
+                // dd(file_exists($context->getRequest()->getBasePath() . "/uploads/"));
+                // dd(file_exists("$this->projectDir.$newUrl"), $this->projectDir);
+
+                $fileToUpload = $entityInstance->getVideoFile();
+
+                $file_name = $this->upload($fileToUpload);
+                $entityInstance->setUrl($file_name);
+            }
+
+
 
             $this->updateEntity($this->get('doctrine')->getManagerForClass($context->getEntity()->getFqcn()), $entityInstance);
 
@@ -217,6 +242,7 @@ class VideoCrudController extends AbstractCrudController
             $this->get('event_dispatcher')->dispatch($event);
             $entityInstance = $event->getEntityInstance();
 
+            //yan add
             if ($file_name != "") {
                 $entityInstance->setUrl($file_name);
             }
