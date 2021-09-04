@@ -6,6 +6,9 @@ use App\Entity\Video;
 use App\Form\FileUploadType;
 use App\Service\FileUploader;
 use App\Admin\YanFied\YanFied;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
@@ -13,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Option\EA;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
@@ -26,14 +30,24 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterCrudActionEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeCrudActionEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Exception\EntityRemoveException;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Exception\ForbiddenActionException;
 use EasyCorp\Bundle\EasyAdminBundle\Exception\InsufficientEntityPermissionException;
-use Symfony\Component\Filesystem\Filesystem;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\BatchActionDto;
+use Symfony\Component\HttpFoundation\Response;
+
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 
 class VideoCrudController extends AbstractCrudController
 {
@@ -86,6 +100,35 @@ class VideoCrudController extends AbstractCrudController
         return $responseParameters;
     }
 
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $qb = $this->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $qb->orderBy('entity.updatedAt', 'desc');
+        return $qb;
+    }
+
+    //yan add 
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        //yan add
+
+        $filesystem = new Filesystem();
+        // $filesystem->remove($entityInstance->getUrl());
+
+        // $filesystem->remove("/uploads/Naruto-Ending-4-Alive.mp4");
+        $newUrl = str_replace("/", "\\", $entityInstance->getUrl());
+
+        // dd($this->projectDir .'\\public\\' .$newUrl);
+        $filesystem->remove($this->projectDir . '\\public\\' . $newUrl);
+
+        $entityManager->remove($entityInstance);
+        $entityManager->flush();
+    }
+
+
+
+
+    //yan add 
     public function edit(AdminContext $context)
     {
         $event = new BeforeCrudActionEvent($context);

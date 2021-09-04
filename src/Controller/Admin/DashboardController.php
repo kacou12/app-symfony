@@ -15,6 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
+
 /**
  * @isGranted("ROLE_ADMIN")
  */
@@ -33,6 +40,8 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
             ->setTitle('App Symfony');
     }
+
+
 
     public function configureMenuItems(): iterable
     {
