@@ -9,9 +9,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * @ApiResource(
  * formats="json",
+ * collectionOperations={"get"={"method"="GET"}, "post"={"method"="POST"}}, 
+ * itemOperations={"get"={"method"="GET"}}, 
  * normalizationContext={"groups"={"contact_read"}}
  * )
  * @ORM\Entity(repositoryClass=ContactRepository::class)
@@ -30,18 +33,21 @@ class Contact
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"contact_read"})
+     * @Assert\NotBlank
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Groups({"contact_read"})
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"contact_read"})
+     * @Assert\NotBlank
      */
     private $message;
 

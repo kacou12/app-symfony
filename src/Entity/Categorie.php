@@ -12,10 +12,13 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *  @ApiResource(
  * formats="json",
+ * collectionOperations={"get"={"method"="GET"}}, 
+ * itemOperations={"get"={"method"="GET"}}, 
  * normalizationContext={"groups"={"categorie_read"}}
  * )
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
@@ -35,6 +38,7 @@ class Categorie
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"categorie_read", "article_read", "video_read"})
+     * @Assert\NotBlank
      */
     private $libelle;
 
@@ -47,6 +51,7 @@ class Categorie
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"categorie_read"})
+     * @Assert\NotBlank
      */
     private $image;
 

@@ -9,10 +9,13 @@ use App\Repository\CommentArticleRepository;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  * formats="json",
+ * collectionOperations={"get"={"method"="GET"}, "post"={"method"="POST"}}, 
+ * itemOperations={"get"={"method"="GET"}}, 
  * attributes={"order"={"id": "desc"}},
  * normalizationContext={"groups"={"comment_article_read"}}
  * )
@@ -32,6 +35,7 @@ class CommentArticle
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"comment_article_read"})
+     * @Assert\NotBlank
      */
     private $message;
 
@@ -44,6 +48,7 @@ class CommentArticle
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"comment_article_read"})
+     * @Assert\NotBlank
      */
     private $author;
 

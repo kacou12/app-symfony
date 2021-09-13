@@ -18,10 +18,13 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  * formats="json",
+ * collectionOperations={"get"={"method"="GET"}}, 
+ * itemOperations={"get"={"method"="GET"}}, 
  * attributes={"order"={"id": "desc"}},
  * normalizationContext={"groups"={"article_read"}}
  * )
@@ -43,12 +46,14 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"article_read"})
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"article_read"})
+     * @Assert\NotBlank
      */
     private $content;
 
@@ -73,6 +78,7 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"article_read"})
+     * @Assert\NotBlank
      */
     private $author;
 

@@ -18,11 +18,14 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\HttpFoundation\File\File;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ApiResource(
  * formats="json",
+ * itemOperations={"get"={"method"="GET"}}, 
+ * attributes={"order"={"id": "desc"}},
  * normalizationContext={"groups"={"video_read"}},
  *  attributes={"order"={"id": "desc"}}
  * )
@@ -45,6 +48,7 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"video_read"})
+     * @Assert\NotBlank
      */
     private $url;
 
@@ -57,12 +61,14 @@ class Video
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"video_read"})
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"video_read"})
+     * @Assert\NotBlank
      */
     private $content;
 

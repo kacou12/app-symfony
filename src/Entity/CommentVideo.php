@@ -10,10 +10,13 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 // use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  * formats="json",
+ * collectionOperations={"get"={"method"="GET"}, "post"={"method"="POST"}}, 
+ * itemOperations={"get"={"method"="GET"}}, 
  * normalizationContext={"groups"={"comment_video_read"}},
  * attributes={"order"={"createdAt": "ASC"}})
  * @ORM\Entity(repositoryClass=CommentVideoRepository::class)
@@ -32,6 +35,7 @@ class CommentVideo
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"comment_video_read"})
+     * @Assert\NotBlank
      */
     private $message;
 
@@ -43,6 +47,7 @@ class CommentVideo
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"comment_video_read"})
+     * @Assert\NotBlank
      */
     private $author;
 
