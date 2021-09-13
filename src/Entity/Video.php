@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  * formats="json",
+ * collectionOperations={"get"={"method"="GET"}}, 
  * itemOperations={"get"={"method"="GET"}}, 
  * attributes={"order"={"id": "desc"}},
  * normalizationContext={"groups"={"video_read"}},
