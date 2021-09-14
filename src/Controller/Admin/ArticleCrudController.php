@@ -22,6 +22,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 
 class ArticleCrudController extends AbstractCrudController
@@ -56,9 +57,9 @@ class ArticleCrudController extends AbstractCrudController
             // IdField::new('id'),
             TextField::new('title', "Titre")->setRequired(true),
             TextField::new('author', "auteur")->setRequired(true),
-            // TextareaField::new('content', "contenu")->setRequired(true),
-            // TextareaField::new('content')->setLabel('contenu')->onlyOnForms()->setFormType(CKEditorType::class),
-            TextareaField::new('content')->setLabel('contenu'),
+
+            // TextareaField::new('content')->setLabel('contenu'),
+            TextEditorField::new('content')->setLabel('contenu'),
             AssociationField::new('categorie', "categorie")->hideOnForm(),
 
             ArrayField::new('commentArticles')->hideOnForm()->hideOnIndex(),

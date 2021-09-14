@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Traits\YanTimestampableEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -34,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Article
 {
-    use TimestampableEntity;
+    use YanTimestampableEntity;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

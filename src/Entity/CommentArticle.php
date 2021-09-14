@@ -4,12 +4,13 @@ namespace App\Entity;
 
 use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
+use App\Traits\YanTimestampableEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CommentArticleRepository;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 /**
  * @ApiResource(
@@ -23,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CommentArticle
 {
-    use TimestampableEntity;
+    use YanTimestampableEntity;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
