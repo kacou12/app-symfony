@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\YanFied;
+namespace App\Controller\Admin\YanFied;
 
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
