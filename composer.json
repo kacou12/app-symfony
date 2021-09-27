@@ -91,11 +91,12 @@
       "assets:install %PUBLIC_DIR%": "symfony-cmd",
       "ckeditor:install": "symfony-cmd"
     },
-    "post-install-cmd": [],
-    "post-update-cmd": [
+    "post-install-cmd": [
       "@auto-scripts"
     ],
-    "compile": "php bin/console doctrine migrations:migrate"
+    "post-update-cmd": [
+      "@auto-scripts"
+    ]
   },
   "conflict": {
     "symfony/symfony": "*"
