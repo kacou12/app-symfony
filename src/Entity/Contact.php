@@ -8,6 +8,7 @@ use App\Traits\YanTimestampableEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
@@ -26,7 +27,7 @@ class Contact
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups({"contact_read"})
      */

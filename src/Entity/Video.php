@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
@@ -41,7 +42,7 @@ class Video
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups({"video_read"})
      */

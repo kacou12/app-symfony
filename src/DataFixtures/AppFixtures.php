@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Admin;
 use App\Entity\User;
 use App\Factory\ArticleFactory;
 use App\Factory\CategorieFactory;
@@ -26,12 +27,12 @@ class AppFixtures extends Fixture
     {
 
         CategorieFactory::new()->createMany(4);
-        VideoFactory::new()->createMany(15, function () { // note the callback - this ensures that each of the 5 comments has a different Post
+        VideoFactory::new()->createMany(5, function () { // note the callback - this ensures that each of the 5 comments has a different Post
             return [
                 'categorie' => CategorieFactory::random(),
             ];
         });
-        ArticleFactory::new()->createMany(30, function () { // note the callback - this ensures that each of the 5 comments has a different Post
+        ArticleFactory::new()->createMany(10, function () { // note the callback - this ensures that each of the 5 comments has a different Post
             return [
                 'categorie' => CategorieFactory::random(),
             ];
@@ -56,7 +57,7 @@ class AppFixtures extends Fixture
 
     public function createUser($username, $password = "azertyuiop")
     {
-        $user = new User();
+        $user = new Admin();
         $user->setUsername($username);
 
 

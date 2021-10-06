@@ -6,6 +6,7 @@ use App\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 use App\Traits\YanTimestampableEntity;
 use App\Repository\CommentVideoRepository;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -27,7 +28,7 @@ class CommentVideo
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups({"comment_video_read"})
      */

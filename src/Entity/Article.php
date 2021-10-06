@@ -4,22 +4,23 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
+use App\Traits\YanTimestampableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+// use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\HttpFoundation\File\File;
-// use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use App\Traits\YanTimestampableEntity;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -38,7 +39,7 @@ class Article
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups({"article_read"})
      */

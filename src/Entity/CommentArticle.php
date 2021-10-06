@@ -6,6 +6,7 @@ use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
 use App\Traits\YanTimestampableEntity;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use App\Repository\CommentArticleRepository;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -27,7 +28,7 @@ class CommentArticle
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups({"comment_article_read"})
      */

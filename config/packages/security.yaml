@@ -4,14 +4,18 @@ security:
   password_hashers:
     App\Entity\User:
       algorithm: auto
+    App\Entity\Admin:
+      algorithm: auto
+
 
   # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
   providers:
     # used to reload user from session & other features (e.g. switch_user)
     app_user_provider:
       entity:
-        class: App\Entity\User
+        class: App\Entity\Admin
         property: username
+    # used to reload user from session & other features (e.g. switch_user)
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/

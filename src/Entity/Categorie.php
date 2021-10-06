@@ -8,6 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -30,7 +31,7 @@ class Categorie
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      * @Groups({"categorie_read", "article_read"})
      */

@@ -3,22 +3,22 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\UserRepository;
+use App\Repository\AdminRepository;
+
 use App\Traits\YanTimestampableEntity;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass=AdminRepository::class)
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use YanTimestampableEntity;
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @GeneratedValue(strategy="IDENTITY")
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -84,7 +84,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
 
         return $this;
     }
