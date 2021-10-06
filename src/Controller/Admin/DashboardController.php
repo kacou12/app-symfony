@@ -7,7 +7,7 @@ use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\CommentArticle;
 use App\Entity\CommentVideo;
-use App\Entity\User;
+#use App\Entity\User;
 use App\Entity\Video;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

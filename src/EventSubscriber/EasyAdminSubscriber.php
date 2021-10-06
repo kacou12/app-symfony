@@ -4,7 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Entity\Client;
 use App\Entity\Entreprise;
-use App\Entity\User;
+#use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;

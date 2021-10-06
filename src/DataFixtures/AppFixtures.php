@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Admin;
-use App\Entity\User;
+#use App\Entity\User;
 use App\Factory\ArticleFactory;
 use App\Factory\CategorieFactory;
 use App\Factory\CommentArticleFactory;
