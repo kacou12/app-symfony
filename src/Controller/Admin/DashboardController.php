@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
 use App\Entity\Article;
 use App\Entity\Categorie;
 use App\Entity\CommentArticle;
@@ -46,7 +47,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Mes admins', 'fa fa-home', User::class)->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Mes admins', 'fa fa-home', Admin::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Mes articles', 'fa fa-home', Article::class);
         yield MenuItem::linkToCrud('mes categories', 'fa fa-home', Categorie::class);
         yield MenuItem::linkToCrud('commentaires video', 'fa fa-home', CommentVideo::class);

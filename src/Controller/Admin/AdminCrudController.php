@@ -19,7 +19,7 @@ use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 
-class UserCrudController extends AbstractCrudController
+class AdminCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
